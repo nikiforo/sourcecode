@@ -23,6 +23,9 @@ object Apply {
     val line = sourcecode.Line()
     assert(line == 23)
 
+    val columns = (sourcecode.Column(), sourcecode.Column())
+    assert(columns == (38, 59))
+
     lazy val myLazy = {
       /* Bar used to be a trait, but that ran into the upstream bug
        * https://github.com/scala-js/scala-js/issues/3918 in Scala.js 1.0.0-RC2
@@ -42,7 +45,10 @@ object Apply {
         assert(fileName == "Apply.scala")
 
         val line = sourcecode.Line()
-        assert(line == 44)
+        assert(line == 47)
+
+        val columns = (sourcecode.Column(), sourcecode.Column())
+        assert(columns == (42, 63))
 
         val enclosing = sourcecode.Enclosing()
         assert(

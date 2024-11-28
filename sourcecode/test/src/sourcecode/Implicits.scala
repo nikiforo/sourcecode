@@ -23,6 +23,9 @@ object Implicits {
     val line = implicitly[sourcecode.Line]
     assert(line.value == 23)
 
+    val columns = (implicitly[sourcecode.Column].value, implicitly[sourcecode.Column].value)
+    assert(columns == (48, 85))
+
     lazy val myLazy = {
       /* Bar used to be a trait, but that ran into the upstream bug
        * https://github.com/scala-js/scala-js/issues/3918 in Scala.js 1.0.0-RC2
@@ -45,7 +48,10 @@ object Implicits {
         assert(fileName.value == "Implicits.scala")
 
         val line = implicitly[sourcecode.Line]
-        assert(line.value == 47)
+        assert(line.value == 50)
+
+        val columns = (implicitly[sourcecode.Column].value, implicitly[sourcecode.Column].value)
+        assert(columns == (52, 89))
 
         val enclosing = implicitly[sourcecode.Enclosing]
         assert(
