@@ -62,6 +62,7 @@ The kinds of compilation-time data that `sourcecode` provides are:
 - `sourcecode.FileName`: name of the current file where the call occurs; less
     verbose than `sourcecode.File` but often enough for debugging purposes
 - `sourcecode.Line`: current line number
+- `sourcecode.Column`: column number within the current line
 - `sourcecode.Name`: the name of the nearest enclosing definition: `val`,
   `class`, whatever.
 - `sourcecode.FullName`: the name of the nearest enclosing definition: `val`,

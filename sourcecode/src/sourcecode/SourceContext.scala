@@ -27,6 +27,10 @@ object FileName extends SourceCompanion[String, FileName](new FileName(_)) with 
 
 case class Line(value: Int) extends SourceValue[Int]
 object Line extends SourceCompanion[Int, Line](new Line(_)) with LineMacros
+
+case class Column(value: Int) extends SourceValue[Int]
+object Column extends SourceCompanion[Int, Column](new Column(_)) with ColumnMacros
+
 case class Enclosing(value: String) extends SourceValue[String]
 
 object Enclosing extends SourceCompanion[String, Enclosing](new Enclosing(_)) with EnclosingMacros {

@@ -40,6 +40,11 @@ trait LineMacros {
     ${ Macros.lineImpl }
 }
 
+trait ColumnMacros {
+  inline implicit def generate: sourcecode.Column =
+    ${ Macros.columnImpl }
+}
+
 trait EnclosingMacros {
   inline implicit def generate: Enclosing =
     ${ Macros.enclosingImpl }
@@ -202,6 +207,11 @@ object Macros {
     val offset = linePrefixCache.computeIfAbsent(sourceFile, _ => findLineNumber(sourceFile.content))
     val line = quotes.reflect.Position.ofMacroExpansion.startLine + 1 - offset
     '{new sourcecode.Line(${Expr(line)})}
+  }
+
+  def columnImpl(using Quotes): Expr[sourcecode.Column] = {
+    val column = quotes.reflect.Position.ofMacroExpansion.startColumn
+    '{new sourcecode.Column(${Expr(column)})}
   }
 
   def enclosingImpl(using Quotes): Expr[Enclosing] = {

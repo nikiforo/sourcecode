@@ -31,6 +31,10 @@ trait LineMacros {
   implicit def generate: sourcecode.Line = macro Macros.lineImpl
 }
 
+trait ColumnMacros {
+  implicit def generate: sourcecode.Column = macro Macros.columnImpl
+}
+
 trait EnclosingMacros {
   implicit def generate: Enclosing = macro Macros.enclosingImpl
 }
@@ -139,6 +143,12 @@ object Macros {
 
     val line = c.enclosingPosition.line - offset
     c.Expr[sourcecode.Line](q"""${c.prefix}($line)""")
+  }
+
+  def columnImpl(c: Compat.Context): c.Expr[sourcecode.Column] = {
+    import c.universe._
+    val column = c.enclosingPosition.column
+    c.Expr[sourcecode.Column](q"""${c.prefix}($column)""")
   }
 
   def enclosingImpl(c: Compat.Context): c.Expr[Enclosing] = enclosing[Enclosing](c)(
